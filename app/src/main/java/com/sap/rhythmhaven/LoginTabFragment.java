@@ -1,5 +1,6 @@
 package com.sap.rhythmhaven;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,7 +33,7 @@ public class LoginTabFragment extends Fragment {
         login_email = view.findViewById(R.id.login_email);
         login_password = view.findViewById(R.id.login_password);
 
-        Button login_button = view.findViewById(R.id.login_button);
+        login_button = view.findViewById(R.id.login_button);
         login_button.setOnClickListener(v -> login());
 
 
@@ -42,22 +43,29 @@ public class LoginTabFragment extends Fragment {
     }
 
     private void login() {
-        String username = login_email.getText().toString();
+        String email = login_email.getText().toString();
         String password = login_password.getText().toString();
 
         ApiService apiService = RetrofitInstane.getClient().create(ApiService.class);
-        UserEntity userEntity = new UserEntity(login_email, login_password);
+        UserEntity userEntity = new UserEntity(email, password);
         Call<UserEntity> call = apiService.login(userEntity);
         call.enqueue(new Callback<UserEntity>() {
             @Override
             public void onResponse(Call<UserEntity> call, Response<UserEntity> response) {
-                Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
-
+                if (response.isSuccessful()) {
+                    Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+                    // Navigate to HomeActivity
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(intent);
+                    getActivity().finish(); // Optional: finish the current activity
+                } else {
+                    Toast.makeText(getActivity(), "Login Failed: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<UserEntity> call, Throwable t) {
-                Toast.makeText(getActivity(), "Login Faild", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Login Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

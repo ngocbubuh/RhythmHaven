@@ -1,30 +1,33 @@
 package com.sap.rhythmhaven.entity;
 
-import android.widget.EditText;
+import com.google.gson.annotations.SerializedName;
 
 public class UserEntity {
-    private String  login_email;
-    private String  login_password;
+    @SerializedName("email")
+    private String email;
 
-    public UserEntity(EditText loginEmail, EditText loginPassword) {
-    }
+    @SerializedName("password")
+    private String password;
 
     public UserEntity(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    public String getLogin_email() {
-        return login_email;
+    // Getters and setters
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin_email(String login_email) {
-        this.login_email = login_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getLogin_password() {
-        return login_password;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLogin_password(String login_password) {
-        this.login_password = login_password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
