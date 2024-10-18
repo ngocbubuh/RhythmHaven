@@ -1,6 +1,8 @@
 package com.sap.rhythmhaven;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +13,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.sap.rhythmhaven.entity.UserEntity;
+import com.sap.rhythmhaven.interfaceRetrofit.ApiService;
+import com.sap.rhythmhaven.interfaceRetrofit.RetrofitInstane;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Console;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity extends AppCompatActivity implements LoginTabFragment.LoginListener {
 
     private TabLayout tablayout;
     private ViewPager2 viewPager2;
@@ -60,5 +71,35 @@ public class MainActivity extends AppCompatActivity {
                 tablayout.selectTab(tablayout.getTabAt(position));
             }
         });
-}
+    }
+
+    @Override
+    public void onLoginAttempt(String email, String password) {
+        ApiService apiService = RetrofitInstane.getClient().create(ApiService.class);
+        UserEntity userEntity = new UserEntity(email, password);
+        Call<UserEntity> call = apiService.login(userEntity);
+        call.enqueue(new Callback<UserEntity>() {
+            @Override
+            public void onResponse(Call<UserEntity> call, Response<UserEntity> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    // Navigate to HomePage
+                    try {
+                        Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
+                        startActivity(intent);
+                        finish(); // Close MainActivity
+                    } catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Login Failed: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserEntity> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Login Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
