@@ -1,8 +1,10 @@
 package com.sap.rhythmhaven;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -25,6 +27,21 @@ public class LoginTabFragment extends Fragment {
 
     private  EditText login_email, login_password;
     private  Button login_button;
+    private LoginListener loginListener;
+
+    public interface LoginListener {
+        void onLoginAttempt(String email, String password);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof LoginListener) {
+            loginListener = (LoginListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement LoginListener");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
