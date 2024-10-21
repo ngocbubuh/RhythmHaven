@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    >
+
+    <!-- Name TextView -->
+    <TextView
+        android:id="@+id/nametxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <!-- Description TextView -->
+    <TextView
+        android:id="@+id/descriptiontxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Product description goes here."
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nametxt"
+        android:layout_marginTop="12dp" />
+
+    <!-- Type TextView -->
+    <TextView
+        android:id="@+id/typetxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Type:"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptiontxt"
+        android:layout_marginTop="12dp" />
+
+    <!-- Price TextView -->
+    <TextView
+        android:id="@+id/pricetxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Price: ...vnd"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/typetxt"
+        android:layout_marginTop="12dp" />
+
+    <!-- Quantity TextView (Initially hidden) -->
+    <TextView
+        android:id="@+id/quantitytxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Quantity: 1"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pricetxt"
+        android:layout_marginTop="12dp" />
+
+    <!-- Add to Cart Button -->
+    <Button
+        android:id="@+id/addtocart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Add to Cart"
+        android:textSize="16sp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pricetxt"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
