@@ -1,15 +1,18 @@
-package com.sap.rhythmhaven;
+package com.sap.rhythmhaven.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sap.rhythmhaven.API.ProductService;
+import com.sap.rhythmhaven.R;
+import com.sap.rhythmhaven.entity.CartManager;
 import com.sap.rhythmhaven.entity.ProductEntity;
 
 import java.util.List;
@@ -34,12 +37,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         ProductEntity productEntity = productEntityList.get(position);
-//        holder.nameTextView.setText(productEntity.getName());
-        holder.nameTextView.setText(productEntity.getName());
-        holder.descriptionTextView.setText(productEntity.getDescription());
-        holder.quantityTextView.setText(productEntity.getQuantity());
+        holder.nameTextView.setText("Tên nhạc cụ :" + productEntity.getName());
+        holder.descriptionTextView.setText("Chú thích: "+productEntity.getDescription());
+        holder.quantityTextView.setText("Loai nha cụ : "+productEntity.getQuantity());
         holder.typeTextView.setText(productEntity.getType());
-        holder.priceTextView.setText(productEntity.getPrice());
+        holder.priceTextView.setText("Giá tiền : "+productEntity.getPrice() + " VND");
+
+        holder.addtocartButton.setOnClickListener(v -> {
+            CartManager.getInstance().addToCart(productEntity);
+            Toast.makeText(v.getContext(), "Added to cart", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -49,6 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView,descriptionTextView,typeTextView,priceTextView,quantityTextView;
+        Button addtocartButton;
 
         public ProductViewHolder(@NonNull View itemView){
             super(itemView);
@@ -57,6 +65,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             typeTextView = itemView.findViewById(R.id.typetxt);
             priceTextView = itemView.findViewById(R.id.pricetxt);
             quantityTextView = itemView.findViewById(R.id.quantitytxt);
+            addtocartButton = itemView.findViewById(R.id.addtocart);
         }
     }
 }
