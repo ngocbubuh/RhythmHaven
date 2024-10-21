@@ -1,29 +1,42 @@
 package com.sap.rhythmhaven;
 
-<<<<<<< Updated upstream
-=======
 import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
->>>>>>> Stashed changes
+
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-<<<<<<< Updated upstream
-=======
 import android.view.View;
 import android.widget.Button;
->>>>>>> Stashed changes
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.sap.rhythmhaven.API.ProductRepository;
+import com.sap.rhythmhaven.API.ProductService;
+import com.sap.rhythmhaven.Adapter.ProductAdapter;
+import com.sap.rhythmhaven.entity.ProductEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class HomePageActivity extends AppCompatActivity {
+
+    RecyclerView recyclerViewProduct;
+    ProductAdapter productAdapter;
+    ProductService productService;
+    List<ProductEntity> productEntityList;
+    Button buttonViewCart,buttonViewInvoices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +44,6 @@ public class HomePageActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_page);
 
-<<<<<<< Updated upstream
-=======
         recyclerViewProduct = findViewById(R.id.recyclerView);
         recyclerViewProduct.setLayoutManager(new LinearLayoutManager(this));
 
@@ -45,7 +56,6 @@ public class HomePageActivity extends AppCompatActivity {
 
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerViewProduct);
 
-
         // Thêm code này để xử lý sự kiện click nút mở Chat
         Button btnOpenChat = findViewById(R.id.btnOpenChat);
         btnOpenChat.setOnClickListener(new View.OnClickListener() {
@@ -54,13 +64,28 @@ public class HomePageActivity extends AppCompatActivity {
                 openChat();
             }
         });
-
->>>>>>> Stashed changes
+      
         TextView welcomeText = findViewById(R.id.welcomeText);
-        welcomeText.setText("Welcome to the Home Page!");
+        welcomeText.setText("Welcome to the RhythmHaven !");
+
+        buttonViewCart = findViewById(R.id.buttonViewCart);
+        buttonViewCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePageActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonViewInvoices = findViewById(R.id.buttonViewInvoices);
+        buttonViewInvoices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePageActivity.this, InvoiceActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-<<<<<<< Updated upstream
-=======
+
     private void loadProduct() {
         productEntityList.clear();
         Call<ProductEntity[]> call = productService.getProducts();
@@ -81,6 +106,28 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void loadProduct() {
+        productEntityList.clear();
+        Call<ProductEntity[]> call = productService.getProducts();
+        call.enqueue(new Callback<ProductEntity[]>() {
+            @Override
+            public void onResponse(Call<ProductEntity[]> call, Response<ProductEntity[]> response) {
+                if (response.body() != null) {
+                    for (ProductEntity trainee : response.body()) {
+                        productEntityList.add(trainee);
+                    }
+                    productAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductEntity[]> call, Throwable t) {
+                // Handle failure
+            }
+        });
+    }
+
 
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, 0) {
         @Override
@@ -104,5 +151,5 @@ public class HomePageActivity extends AppCompatActivity {
         Intent intent = new Intent(HomePageActivity.this, ChatActivity.class);
         startActivity(intent);
     }
->>>>>>> Stashed changes
+
 }

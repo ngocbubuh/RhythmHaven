@@ -13,17 +13,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.sap.rhythmhaven.Adapter.ViewPagerAdapter;
 import com.sap.rhythmhaven.entity.UserEntity;
 import com.sap.rhythmhaven.interfaceRetrofit.ApiService;
 import com.sap.rhythmhaven.interfaceRetrofit.RetrofitInstane;
-
-import java.io.Console;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements LoginTabFragment.LoginListener {
+public class MainActivity extends AppCompatActivity implements LoginTabFragment.LoginListener, signupTabFragment.SignupListener {
 
     private TabLayout tablayout;
     private ViewPager2 viewPager2;
@@ -100,6 +99,14 @@ public class MainActivity extends AppCompatActivity implements LoginTabFragment.
             public void onFailure(Call<UserEntity> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Login Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        });
+    }
+
+    @Override
+    public void onSignupSuccess() {
+        runOnUiThread(() -> {
+            viewPager2.setCurrentItem(0, true); // true enables smooth scroll
+            tablayout.selectTab(tablayout.getTabAt(0));
         });
     }
 }

@@ -1,71 +1,86 @@
-<<<<<<< Updated upstream
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/homepageactivity"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".HomePageActivity">
-=======
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homepageactivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white"
-    tools:context=".HomePageActivity">
->>>>>>> Stashed changes
+    android:background="@android:color/white">
 
-<TextView
-    android:id="@+id/welcomeText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Welcome to the Home Page!"
-    android:textSize="24sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
 
-<<<<<<< Updated upstream
-</androidx.constraintlayout.widget.ConstraintLayout>
-=======
-    <!-- RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:padding="8dp"
-        android:background="@android:color/white"
-        android:layout_marginTop="16dp"
-        android:scrollbars="vertical" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="Welcome to the Shop!"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp" />
 
-        <Button
+    <!-- View Cart Button -->
+    <Button
+        android:id="@+id/buttonViewCart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="View Cart"
+        android:textSize="16sp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/welcomeText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- View Invoices Button -->
+    <Button
+        android:id="@+id/buttonViewInvoices"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="View Invoices"
+        android:textSize="16sp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/buttonViewCart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+  
+  <Button
             android:id="@+id/btnOpenMap"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Open Map" />
-
-        <Button
+            android:text="Open Map" 
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+  <Button
             android:id="@+id/btnOpenChat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Open Chat" />
+            android:text="Open Chat"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent
+          />
 
-    </LinearLayout>
-
-</LinearLayout>
->>>>>>> Stashed changes
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonViewInvoices"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+  
