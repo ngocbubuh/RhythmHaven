@@ -13,11 +13,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.sap.rhythmhaven.Adapter.ViewPagerAdapter;
 import com.sap.rhythmhaven.entity.UserEntity;
 import com.sap.rhythmhaven.interfaceRetrofit.ApiService;
 import com.sap.rhythmhaven.interfaceRetrofit.RetrofitInstane;
-
-import java.io.Console;
 
 import retrofit2.Call;
 import retrofit2.Callback;
