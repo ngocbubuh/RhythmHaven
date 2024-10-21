@@ -1,7 +1,11 @@
 package com.sap.rhythmhaven;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +56,15 @@ public class HomePageActivity extends AppCompatActivity {
 
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerViewProduct);
 
+        // Thêm code này để xử lý sự kiện click nút mở Chat
+        Button btnOpenChat = findViewById(R.id.btnOpenChat);
+        btnOpenChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openChat();
+            }
+        });
+      
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText("Welcome to the RhythmHaven !");
 
@@ -94,6 +107,28 @@ public class HomePageActivity extends AppCompatActivity {
         });
     }
 
+    private void loadProduct() {
+        productEntityList.clear();
+        Call<ProductEntity[]> call = productService.getProducts();
+        call.enqueue(new Callback<ProductEntity[]>() {
+            @Override
+            public void onResponse(Call<ProductEntity[]> call, Response<ProductEntity[]> response) {
+                if (response.body() != null) {
+                    for (ProductEntity trainee : response.body()) {
+                        productEntityList.add(trainee);
+                    }
+                    productAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductEntity[]> call, Throwable t) {
+                // Handle failure
+            }
+        });
+    }
+
+
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, 0) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -111,4 +146,10 @@ public class HomePageActivity extends AppCompatActivity {
             // Không cần vẽ gì khi vuốt
         }
     };
+
+    private void openChat() {
+        Intent intent = new Intent(HomePageActivity.this, ChatActivity.class);
+        startActivity(intent);
+    }
+
 }
