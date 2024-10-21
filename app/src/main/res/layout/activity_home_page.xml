@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,6 +7,18 @@ android:id="@+id/homepageactivity"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".HomePageActivity">
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homepageactivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    tools:context=".HomePageActivity">
+>>>>>>> Stashed changes
 
 <TextView
     android:id="@+id/welcomeText"
@@ -18,4 +31,41 @@ tools:context=".HomePageActivity">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
+<<<<<<< Updated upstream
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnOpenMap"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Open Map" />
+
+        <Button
+            android:id="@+id/btnOpenChat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Open Chat" />
+
+    </LinearLayout>
+
+</LinearLayout>
+>>>>>>> Stashed changes

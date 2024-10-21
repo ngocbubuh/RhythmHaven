@@ -15,6 +15,17 @@
         android:theme="@style/Theme.RhythmHaven"
         tools:targetApi="31">
         <activity
+<<<<<<< Updated upstream
+=======
+            android:name=".ChatActivity" />
+        <activity
+            android:name=".Cart"
+            android:exported="false" />
+        <activity
+            android:name=".ProductDetails"
+            android:exported="false" />
+        <activity
+>>>>>>> Stashed changes
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
