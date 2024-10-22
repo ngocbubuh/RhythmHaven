@@ -153,13 +153,13 @@ public class signupTabFragment extends Fragment {
             public void onFailure(Call<UserEntitySignUp> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 signupButton.setEnabled(true);
-                String errorMessage = "Network error: ";
-                if (t instanceof IOException) {
-                    errorMessage += "Please check your internet connection.";
-                } else {
-                    errorMessage += t.getMessage();
-                }
-                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+//                String errorMessage = "Network error: ";
+//                if (t instanceof IOException) {
+//                    errorMessage += "Please check your internet connection.";
+//                } else {
+//                    errorMessage += t.getMessage();
+//                }
+//                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -64,7 +64,17 @@ public class HomePageActivity extends AppCompatActivity {
                 openChat();
             }
         });
-      
+
+        Button btnOpenMap = findViewById(R.id.btnOpenMap);
+        btnOpenMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMap();
+            }
+        });
+
+
+
         TextView welcomeText = findViewById(R.id.welcomeText);
         welcomeText.setText("Welcome to the RhythmHaven !");
 
@@ -129,5 +139,8 @@ public class HomePageActivity extends AppCompatActivity {
         Intent intent = new Intent(HomePageActivity.this, ChatActivity.class);
         startActivity(intent);
     }
-
+    private void openMap() {
+        Intent intent = new Intent(HomePageActivity.this, MapsActivity.class);
+        startActivity(intent);
+    }
 }
